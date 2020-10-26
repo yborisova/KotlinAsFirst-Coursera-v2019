@@ -2,7 +2,8 @@
 
 package lesson3.task1
 
-import kotlin.math.sqrt
+import java.lang.Math.pow
+import kotlin.math.*
 
 /**
  * Пример
@@ -67,7 +68,11 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int = when (n) {
+    0 -> 1
+    else -> log10(abs(n).toDouble()).toInt() + 1
+}
+
 
 /**
  * Простая
@@ -85,14 +90,25 @@ fun fib(n: Int): Int =
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    val k = m.coerceAtMost(n)
+    var nod = 1
+    for (i in 2..k) {
+        if (((m % i) == 0) && ((n % i) == 0)) nod = i
+    }
+    return ((m * n) / nod)
+}
 
 /**
  * Простая
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    var i = 2
+    while (n % i != 0) i += 1
+    return i
+}
 
 /**
  * Простая
@@ -108,7 +124,15 @@ fun maxDivisor(n: Int): Int = TODO()
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+fun isCoPrime(m: Int, n: Int): Boolean {
+    val k = m.coerceAtMost(n)
+    var nod = 1
+    for (i in 2..k) {
+        if (((m % i) == 0) && ((n % i) == 0)) nod = i
+    }
+    return if (nod == 1) (true)
+    else (false)
+}
 
 /**
  * Простая
@@ -177,7 +201,15 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean {
+    var reverse = 0
+    var copy = n
+    while (copy != 0) {
+        reverse = reverse * 10 + copy % 10
+        copy /= 10
+    }
+    return n == reverse
+}
 
 /**
  * Средняя
